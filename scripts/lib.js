@@ -108,7 +108,7 @@ let createTemplate = (o) => {
     let clicks = 0;
     let slices = [];
     let game = $(`<div class="game" style="aspect-ratio:${w}/${h}; ${w > h ? 'width: 80%;' : 'height: 80%;'} "></div>`);
-    let table = $(`<div class="puzzle-board" style="--bg:url('./images/${img}');"></div>`);
+    let table = $(`<div class="puzzle-board" style="--bg:url('../images/${img}');"></div>`);
     table.append(game);
     let logger = $(`<div class="puzzle-log"></div>`);
     let ind = 0;
@@ -127,8 +127,8 @@ let createTemplate = (o) => {
     }
 
     $('.board').empty('').append(table, logger);
-    const elem = $('.board').find('.game').get(0);
-    const panzoom = Panzoom(elem, { contain: 'inside', startScale: 1 })
+    const elem = $('.board .game').get()[0];
+    const panzoom = Panzoom(elem, { startScale: 1 })
     shuffle();
     slices.forEach(m => {
         game.append(m.e);
