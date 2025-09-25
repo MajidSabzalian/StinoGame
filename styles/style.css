@@ -1,6 +1,13 @@
+@import url(../fonts/faw/css/all.min.css);
+@import url(../fonts/iransans/css/fontiran.css);
+body {
+  direction: rtl;
+  font-family: irs, tahoma, arial;
+}
+
 * {
-  transition: all ease 0.3s;
   box-sizing: border-box;
+  transition: all ease 0.3s;
 }
 
 .page {
@@ -9,15 +16,69 @@
   display: flex;
   flex-flow: column;
 }
-.page .header {
+.page.noborder > .header {
+  height: 0px;
+  transform: translateY(-100px);
+}
+.page > .header {
+  height: 96px;
   justify-self: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.page .menu {
+.page > .header .center {
+  text-align: center;
+  height: 32px;
+}
+.page > .menu {
   justify-self: flex-end;
+  display: flex;
+  flex-flow: row;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
 }
-.page .body {
+.page > .menu strong {
+  bottom: 100%;
+  transform: translateY(50%);
+  position: absolute;
+  height: 10px;
+  background-image: linear-gradient(45deg, #07c700, #00aeff);
+  border-radius: 100px;
+  display: block;
+}
+.page > .menu label {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 25px 0px;
+  gap: 5px;
+}
+.page > .menu label.act i {
+  scale: 1.2;
+}
+.page > .menu label.act span {
+  transform: translateY(5px);
+  background-image: linear-gradient(45deg, #07c700, #00aeff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all ease 0.3s;
+}
+.page > .menu label i {
+  font-size: 24px;
+  scale: 0.7;
+}
+.page > .menu label span {
+  font-size: smaller;
+}
+.page > .body {
   flex: 1;
   position: relative;
+  overflow: auto;
 }
 
 .board {
@@ -32,13 +93,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  direction: ltr;
 }
 .board .puzzle-board .game {
   display: flex;
   position: relative;
+  transition: none !important;
 }
 .board .puzzle-log {
   justify-self: flex-end;
+  display: flex;
+  flex-flow: row;
+}
+.board .puzzle-log label {
+  flex: 1;
+  text-align: center;
+}
+.board .puzzle-log label span {
+  display: block;
+  font-size: smaller;
+  opacity: 0.7;
+}
+.board .puzzle-log label b {
+  display: block;
+}
+.board .puzzle-log .value {
+  direction: ltr;
 }
 .board .slice {
   position: absolute;
@@ -46,16 +126,19 @@
   z-index: 2;
 }
 .board .slice:not(.correct) {
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 15%;
+  border: 1px solid #FFF;
+}
+.board .slice.correct {
+  opacity: 0.8;
 }
 .board .slice.selected {
   animation: _hot infinite 0.5s;
   z-index: 3;
 }
 .board .slice .img {
-  pointer-events: none;
   position: absolute;
+  pointer-events: none;
   background-size: 100% 100%;
   background-position: start start;
   background-image: var(--bg);
@@ -72,4 +155,156 @@
   100% {
     transform: scale(1);
   }
+}
+.stino-page {
+  padding: 20px;
+}
+.stino-page.games {
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.stino-page.games .game-item {
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: smaller;
+  gap: 15px;
+}
+.stino-page.games .game-item .img {
+  background-position: center center;
+  background-size: contain;
+  height: 100px;
+  display: inline-flex;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.stino-page.main {
+  background-image: url("../images/bg.jpg");
+  background-position: center center;
+  background-size: cover;
+  position: absolute;
+  inset: 0;
+}
+.stino-page.dificulity {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+.stino-page.dificulity .item {
+  gap: 10px;
+  display: flex;
+  flex-flow: row;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  align-items: center;
+}
+.stino-page.dificulity .item span {
+  flex: 1;
+}
+.stino-page.dificulity .item b {
+  justify-self: flex-end;
+}
+.stino-page.user .header {
+  text-align: center;
+  padding-top: 20px;
+}
+.stino-page.user .header .user-icon {
+  font-size: 128px;
+  opacity: 0.1;
+  height: 128px;
+  line-height: 128px;
+}
+.stino-page.user .header .user-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.stino-page.user .message {
+  margin-top: 20px;
+  text-align: justify;
+  font-size: smaller;
+  opacity: 0.7;
+  padding: 20px;
+}
+.stino-page.info {
+  text-align: justify;
+}
+.stino-page.info .intro {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  color: #222;
+}
+.stino-page.info section {
+  margin-bottom: 18px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+.stino-page.info h2 {
+  color: var(--accent);
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+.stino-page.info h3 {
+  margin: 10px 0 6px 0;
+  color: #1f3d4a;
+  font-size: 15px;
+}
+.stino-page.info ul {
+  padding-right: 18px;
+  margin: 8px 0 0 0;
+  color: var(--muted);
+}
+.stino-page.info ul li {
+  margin: 6px 0;
+}
+.stino-page.info .grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 12px;
+}
+.stino-page.info .card {
+  background: linear-gradient(180deg, #fff, #fbfdff);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #eef4f6;
+}
+.stino-page.shop {
+  text-align: center;
+}
+.stino-page.shop .message {
+  margin-top: 20px;
+  font-size: smaller;
+  opacity: 0.7;
+  padding: 20px;
+}
+.stino-page.shop .btn {
+  display: inline-flex;
+  padding: 15px;
+  flex-flow: row;
+  align-items: center;
+  gap: 10px;
+  background-image: linear-gradient(45deg, #07c700, #00aeff);
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.stino-page.shop .btn i {
+  font-size: 20px;
+}
+.stino-page.shop .btn span {
+  font-size: normal;
 }/*# sourceMappingURL=style.css.map */
